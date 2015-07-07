@@ -9,7 +9,7 @@ node /^web/ {
   file{"/var/www/html/index.html":
     ensure   => file,
     content  => $web_content,
-    require  => [File["/var/www/html"], Class['apache']],
+    require  => [File["/var/www/html"]],
   }
 
 }
