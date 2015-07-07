@@ -33,7 +33,7 @@ node /^web/ {
 
   $motd_content = hiera('motd_content')
 
-  }
+
 
 
 
