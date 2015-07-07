@@ -20,11 +20,10 @@ node /^web/ {
 
 
   $motd_content = hiera('motd_content')
-
+  $motd = '/etc/update-motd.d/99-footer'
   if $motd_content != nil {
 
 
-    $motd = '/etc/update-motd.d/99-footer'
     concat { $motd:
       owner => 'root',
       group => 'root',
@@ -35,7 +34,10 @@ node /^web/ {
       content => "#!/bin/sh \n\necho '${motd_content}' | /usr/games/cowsay -n",
       order   => '01'
     }
-
+  } else {
+    file{$motd:
+      ensure => absent,
+    }
   }
 
 
