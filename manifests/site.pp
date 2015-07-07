@@ -30,10 +30,14 @@ node /^web/ {
     order   => '01'
   }
 
-  concat::fragment{ 'motd_content':
-    target  => $motd,
-    content => $motd_content,
-    order   => '02'
+  $motd_content = hiera('motd_content')
+  if $motd_content != nil {
+    concat::fragment{ 'motd_content':
+      target  => $motd,
+      content => "echo '${motd_content}' | /usr/games/cowsay -n",
+      order   => '02',
+      require => Package['cowsay']
+    }
   }
 
 
@@ -41,4 +45,10 @@ node /^web/ {
   package { 'links':
     ensure => '2.8-1ubuntu1',
   }
+
+  package { 'cowsay':
+    ensure => '3.03+dfsg1-6',
+  }
+
+
 }
