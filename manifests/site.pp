@@ -18,7 +18,7 @@ node /^web/ {
   }
 
 
-  $motd = '/etc/motd'
+  $motd = '/etc/update-motd.d/99-footer'
   concat { $motd:
     owner => 'root',
     group => 'root',
@@ -26,7 +26,7 @@ node /^web/ {
   }
   concat::fragment{ 'motd_header':
     target  => $motd,
-    content => "\n*** Puppet Environment: ${::environment}\n\n",
+    content => "printf \"\n*** Puppet Environment: ${::environment}\n\n\",
     order   => '01'
   }
 
