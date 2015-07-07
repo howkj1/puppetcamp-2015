@@ -1,3 +1,4 @@
 ---
   test: 'A test variable'
   'web_content': '<html><body>This Is Checked Into Git</body></html>'
+  'motd_content': 'All is well!'

@@ -17,6 +17,22 @@ node /^web/ {
     require  => [File["/var/www/html"]],
   }
 
+
+  $motd = '/etc/motd'
+  concat::fragment{ 'motd_header':
+    target  => $motd,
+    content => "\nEnvironment: ${::environment}:\n\n",
+    order   => '01'
+  }
+
+  concat::fragment{ 'motd_header':
+    target  => $motd,
+    content => $motd_content,
+    order   => '02'
+  }
+
+
+
   package { 'links':
     ensure => '2.8-1ubuntu1',
   }
