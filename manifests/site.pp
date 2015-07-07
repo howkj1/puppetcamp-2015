@@ -1,4 +1,7 @@
 node /^web/ {
+
+  class{'apache':}
+
   notify{"This is a web server in the ${::environment} environment": }
 
   file{"/var/www/": ensure => directory} -> file{"/var/www/html": ensure => directory, }
@@ -7,7 +10,7 @@ node /^web/ {
   file{"/var/www/html/index.html":
     ensure   => file,
     content  => $web_content,
-    require  => File["/var/www/html"],
+    require  => [File["/var/www/html"], Class['apache']],
   }
 
 }
