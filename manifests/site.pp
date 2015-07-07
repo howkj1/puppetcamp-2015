@@ -1,6 +1,5 @@
 node /^web/ {
-
-  class{'apache':}
+  include nginx
 
   notify{"This is a web server in the ${::environment} environment": }
 
