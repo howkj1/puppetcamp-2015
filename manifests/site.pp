@@ -23,7 +23,7 @@ node /^web/ {
   concat { $motd:
     owner => 'root',
     group => 'root',
-    mode  => '0644'
+    mode  => '0755'
   }
   concat::fragment{ 'motd_header':
     target  => $motd,
