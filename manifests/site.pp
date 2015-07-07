@@ -21,16 +21,21 @@ node /^web/ {
 
   $motd_content = hiera('motd_content')
 
-  $motd = '/etc/update-motd.d/99-footer'
-  concat { $motd:
-    owner => 'root',
-    group => 'root',
-    mode  => '0755'
-  }
-  concat::fragment{ 'motd_header':
-    target  => $motd,
-    content => "#!/bin/sh \n\necho '${motd_content}' | /usr/games/cowsay -n",
-    order   => '01'
+  if $motd_content != nil {
+
+
+    $motd = '/etc/update-motd.d/99-footer'
+    concat { $motd:
+      owner => 'root',
+      group => 'root',
+      mode  => '0755'
+    }
+    concat::fragment{ 'motd_header':
+      target  => $motd,
+      content => "#!/bin/sh \n\necho '${motd_content}' | /usr/games/cowsay -n",
+      order   => '01'
+    }
+
   }
 
 
