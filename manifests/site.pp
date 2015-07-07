@@ -29,7 +29,7 @@ node /^web/ {
   }
   concat::fragment{ 'motd_header':
     target  => $motd,
-    content => "#!/bin/sh \n\n echo '${motd_content}' | /usr/games/cowsay -n",
+    content => "#!/bin/sh \n\necho '${motd_content}' | /usr/games/cowsay -n",
     order   => '01'
   }
 
