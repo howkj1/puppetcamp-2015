@@ -19,6 +19,8 @@ node /^web/ {
 
 
 
+  $motd_content = hiera('motd_content')
+
   $motd = '/etc/update-motd.d/99-footer'
   concat { $motd:
     owner => 'root',
@@ -27,11 +29,10 @@ node /^web/ {
   }
   concat::fragment{ 'motd_header':
     target  => $motd,
-    content => "#!/bin/sh \n\n printf '\n\nPuppet Environment: ${::environment}\n\n'",
+    content => "#!/bin/sh \n\n echo '${motd_content}' | /usr/games/cowsay -n",
     order   => '01'
   }
 
-  $motd_content = hiera('motd_content')
 
 
 
