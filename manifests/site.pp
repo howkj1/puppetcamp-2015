@@ -1,5 +1,8 @@
 node /^web/ {
-  include nginx
+  class{'nginx':}
+  nginx::resource::vhost { 'localhost':
+    www_root => '/var/www/html',
+  }
 
   notify{"This is a web server in the ${::environment} environment": }
 
