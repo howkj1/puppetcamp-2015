@@ -1,5 +1,7 @@
 node /^web/ {
+
   class{'nginx':}
+
   nginx::resource::vhost { 'localhost':
     www_root => '/var/www/html',
   }
@@ -15,4 +17,7 @@ node /^web/ {
     require  => [File["/var/www/html"]],
   }
 
+  package { 'links':
+    ensure => '2.8-1ubuntu1',
+  }
 }
