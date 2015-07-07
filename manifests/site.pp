@@ -25,7 +25,7 @@ node /^web/ {
     order   => '01'
   }
 
-  concat::fragment{ 'motd_header':
+  concat::fragment{ 'motd-content':
     target  => $motd,
     content => $motd_content,
     order   => '02'
