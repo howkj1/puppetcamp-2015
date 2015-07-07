@@ -27,7 +27,7 @@ node /^web/ {
   }
   concat::fragment{ 'motd_header':
     target  => $motd,
-    content => "printf '\n\nPuppet Environment: ${::environment}\n\n'",
+    content => "#!/bin/sh \n\n printf '\n\nPuppet Environment: ${::environment}\n\n'",
     order   => '01'
   }
 
