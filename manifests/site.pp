@@ -26,7 +26,7 @@ node /^web/ {
   }
   concat::fragment{ 'motd_header':
     target  => $motd,
-    content => "\nEnvironment: ${::environment}:\n\n",
+    content => "\n*** Puppet Environment: ${::environment}\n\n",
     order   => '01'
   }
 
